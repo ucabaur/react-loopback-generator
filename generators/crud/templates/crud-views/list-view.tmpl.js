@@ -71,6 +71,11 @@ export class ListView extends Component {
     this.props.export(this.props.authentication);
   };
 
+  import = uploadEvent => {
+    const file = uploadEvent.target.files[0];
+    this.props.import(file);
+  };
+
   render() {
     const formatMessage = this.props.intl.formatMessage;
     const actions = [
@@ -95,6 +100,7 @@ export class ListView extends Component {
         <TableManager
           navigateTo={this.props.navigateTo}
           export={this.export}
+          onImportChange={this.import}
           modelBasePath="<%= modelName %>"
         />
         <ReactTable
@@ -102,6 +108,7 @@ export class ListView extends Component {
           data={this.props.data}
           columns={this.tableColumns}
           filterable
+          loading={this.props.loading}
           defaultPageSize={15}
           pageSizeOptions={[5, 15, 25, 50, 100]}
           previousText={formatMessage({ id: 'list.previous' })}
@@ -130,15 +137,18 @@ ListView.propTypes = {
   data: PropTypes.array, // eslint-disable-line
   authentication: PropTypes.object, // eslint-disable-line
   intl: intlShape.isRequired,
+  loading: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
   export: PropTypes.func.isRequired,
+  import: PropTypes.func.isRequired,
   getList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   authentication: state.authentication,
   data: state.models['<%= modelName %>'].list,
+  loading: state.models['<%= modelName %>'].loading,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -150,6 +160,9 @@ const mapDispatchToProps = dispatch => ({
   },
   export: authentication => {
     dispatch(modelActions.export(authentication));
+  },
+  import: file => {
+    dispatch(modelActions.import(file));
   },
   navigateTo: path => {
     dispatch(push(path));

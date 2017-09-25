@@ -11,12 +11,13 @@ describe('[Component] TableManager', () => {
   const defaultProps = {
     navigateTo: () => {},
     modelBasePath: '/model-route-path',
+    onImportChange: () => {},
     intl: {
       formatMessage: () => {},
     },
   };
 
-  const setup = (propsOverride) => {
+  const setup = propsOverride => {
     const finalProps = Object.assign(defaultProps, propsOverride);
     const shallowWrapper = shallow(<TableManager {...finalProps} />);
     return {
@@ -30,9 +31,9 @@ describe('[Component] TableManager', () => {
   });
 
   describe('[UI]', () => {
-    it('should render a raised button for creation', () => {
+    it('should render three buttons for entity creation, export and import', () => {
       const { shallowWrapper } = setup();
-      expect(shallowWrapper.find(RaisedButton).length).to.equal(1);
+      expect(shallowWrapper.find(RaisedButton).length).to.equal(3);
     });
   });
 
@@ -44,8 +45,25 @@ describe('[Component] TableManager', () => {
         modelBasePath: '/bce-data',
       });
 
-      shallowWrapper.find(RaisedButton).simulate('click');
+      shallowWrapper
+        .find(RaisedButton)
+        .at(0)
+        .simulate('click');
       expect(routeSpy.calledWith('/bce-data/create')).to.be.true; // eslint-disable-line
+    });
+
+    it('should call the export props when the export button is clicked', () => {
+      const exportSpy = sinon.spy();
+      const { shallowWrapper } = setup({
+        export: exportSpy,
+        modelBasePath: '/bce-data',
+      });
+
+      shallowWrapper
+        .find(RaisedButton)
+        .at(1)
+        .simulate('click');
+      expect(exportSpy.calledWith()).to.be.true; // eslint-disable-line
     });
   });
 });

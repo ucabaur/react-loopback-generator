@@ -12,7 +12,10 @@ import TableManager from '../../../../components/crud-view/table-manager';
 describe('[Component] ListView', () => {
   const defaultProps = {
     data: [],
+    loading: false,
     getList: () => {},
+    import: () => {},
+    export: () => {},
     navigateTo: () => {},
     intl: {
       formatMessage: obj => obj.id,

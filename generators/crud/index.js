@@ -64,7 +64,8 @@ module.exports = generators.Base.extend({
         idInjection: true,
         mixins: {
           Fullsearch: {},
-          ExcelExport: {}
+          ExcelExport: {},
+          ExcelImport: {}
         },
         options: {
           validateUpsert: true,

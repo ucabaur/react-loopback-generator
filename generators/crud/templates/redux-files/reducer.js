@@ -36,6 +36,16 @@ export default function reducer(state = initialState, action) {
           el => el[action.payload.modelKeyId] !== action.payload.id,
         ),
       };
+    case cst.LOADING_ON:
+      return {
+        ...state,
+        loading: true,
+      };
+    case cst.LOADING_OFF:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
