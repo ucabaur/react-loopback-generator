@@ -74,6 +74,30 @@ export default {
           dispatch(this.notifyError('notification.delete.error'));
         });
   },
+  import(file) {
+    return dispatch => {
+      const data = new FormData();
+      data.append('file', file);
+      dispatch(this.setLoading());
+      dispatch(
+        request('api/<%= apiUrl %>/import', {
+          method: 'POST',
+          body: data,
+        }),
+      )
+        .then(() => {
+          dispatch(this.find());
+        })
+        .then(() => {
+          dispatch(this.unsetLoading());
+          dispatch(this.notifySuccess('notification.import.success'));
+        })
+        .catch(() => {
+          dispatch(this.unsetLoading());
+          dispatch(this.notifyError('notification.import.error'));
+        });
+    };
+  },
   findRequest() {
     return {
       type: cst.FIND_REQUEST,
@@ -113,5 +137,11 @@ export default {
     return () => {
       window.location = `<%= apiUrl %>/export?access_token=${authentication.id}`;
     };
+  },
+  setLoading() {
+    return { type: cst.LOADING_ON };
+  },
+  unsetLoading() {
+    return { type: cst.LOADING_OFF };
   },
 };

@@ -2,5 +2,7 @@
   "FIND_REQUEST": "<%= actionPrefix %>/FIND_REQUEST",
   "FIND_SUCCESS": "<%= actionPrefix %>/FIND_SUCCESS",
   "FIND_ERROR": "<%= actionPrefix %>/FIND_ERROR",
-  "DELETE_ELEMENT": "<%= actionPrefix %>/DELETE_ELEMENT"
+  "DELETE_ELEMENT": "<%= actionPrefix %>/DELETE_ELEMENT",
+  "LOADING_ON": "<%= actionPrefix %>/LOADING_ON",
+  "LOADING_OFF": "<%= actionPrefix %>/LOADING_OFF"
 }

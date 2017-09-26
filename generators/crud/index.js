@@ -64,7 +64,8 @@ module.exports = generators.Base.extend({
         idInjection: true,
         mixins: {
           Fullsearch: {},
-          ExcelExport: {}
+          ExcelExport: {},
+          ExcelImport: {}
         },
         options: {
           validateUpsert: true,
@@ -173,25 +174,49 @@ module.exports = generators.Base.extend({
     },
     createAction: function () {
       const actionFileName = kebabCase(this.options.name);
+      const constantFileName = kebabCase(this.options.name);
+      const apiUrl = `api/${kebabCase(this.options.plural)}`;
+      const templateVariables = {
+        constantFileName,
+        apiUrl,
+        actionFileName
+      };
+
       return this.fs.copyTpl(
         this.templatePath('redux-files/action.js'),
         this.destinationPath(`client/source/actions/models/${actionFileName}.js`),
-        {
-          constantFileName: kebabCase(this.options.name),
-          apiUrl: `api/${kebabCase(this.options.plural)}`
-        }
-      );
+        templateVariables
+      )
+      .then(() => {
+        return this.fs.copyTpl(
+          this.templatePath('redux-files/action.test.js'),
+          this.destinationPath(`client/source/actions/models/${actionFileName}.test.js`),
+          templateVariables
+        )
+      });
     },
     createReducer: function () {
       const reducerFileName = kebabCase(this.options.name);
+      const constantFileName = kebabCase(this.options.name);
+      const actionReduxName = this.options.name.toUpperCase();
+      const templateVariables = {
+        constantFileName,
+        actionReduxName,
+        reducerFileName
+      };
+
       return this.fs.copyTpl(
         this.templatePath('redux-files/reducer.js'),
         this.destinationPath(`client/source/reducers/models/${reducerFileName}.js`),
-        {
-          constantFileName: kebabCase(this.options.name),
-          actionReduxName: this.options.name.toUpperCase(),
-        }
-      );
+        templateVariables
+      )
+      .then(() => {
+        return this.fs.copyTpl(
+          this.templatePath('redux-files/reducer.test.js'),
+          this.destinationPath(`client/source/reducers/models/${reducerFileName}.test.js`),
+          templateVariables
+        )
+      });
     },
     listView: function(){
       const containerFolder = kebabCase(this.options.name);
