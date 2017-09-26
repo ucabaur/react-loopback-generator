@@ -40,6 +40,7 @@ export class ListView extends Component {
         filterable: false,
         sortable: false,
         headerStyle: { boxShadow: "none" },
+        style: { textAlign: "center" },
         Cell: row => (
           <TableActionCell
             row={row}
