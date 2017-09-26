@@ -80,7 +80,10 @@ export default {
       data.append('file', file);
       dispatch(this.setLoading());
       dispatch(
-        request('api/referentiel-ae/import', { method: 'POST', body: data }),
+        request('api/<%= apiUrl %>/import', {
+          method: 'POST',
+          body: data,
+        }),
       )
         .then(() => {
           dispatch(this.find());
