@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
-import modelActions from './ae-data';
+import modelActions from './<%= actionFileName %>';
 import * as networking from '../networking';
 import cst from '../../constants/models/<%= constantFileName %>.json';
 import notificationCst from '../../constants/notification.json';

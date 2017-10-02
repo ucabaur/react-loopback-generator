@@ -5,12 +5,12 @@ import sinon from 'sinon';
 
 import IconButton from 'material-ui/IconButton';
 
-import { CreateView } from './index';
-import ModelForm from '../../../../components/crud-view/model-form';
+import CreateView from './index';
+import ModelForm from '../model-form';
 
 describe('[Component] CreateView', () => {
   const defaultProps = {
-    navigateTo: () => {},
+    navigateToList: () => {},
     intl: {
       formatMessage: obj => obj.id,
     },
@@ -50,11 +50,11 @@ describe('[Component] CreateView', () => {
     it('should navigate to the list route of a given model when the return button is clicked', () => {
       const routeSpy = sinon.spy();
       const { shallowWrapper } = setup({
-        navigateTo: routeSpy,
+        navigateToList: routeSpy,
       });
 
       shallowWrapper.find(IconButton).simulate('click');
-      expect(routeSpy.calledWith('/<%= modelName %>/list')).to.be.true; // eslint-disable-line
+      expect(routeSpy.calledWith()).to.be.true; // eslint-disable-line
     });
   });
 });

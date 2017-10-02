@@ -6,7 +6,7 @@ import ReactTable from 'react-table';
 
 import Dialog from 'material-ui/Dialog';
 
-import { ListView } from './index';
+import ListView from './index';
 import TableManager from '../table-manager';
 
 describe('[Component] ListView', () => {

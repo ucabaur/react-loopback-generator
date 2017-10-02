@@ -18,7 +18,7 @@ export default class CreateView extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-    const { model, modelKeyId } = this.props.model;
+    const { model, modelKeyId } = this.props;
     return (
       <div className={styles.container}>
         <div className={styles.headerTitle}>

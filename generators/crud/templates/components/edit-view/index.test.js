@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import IconButton from 'material-ui/IconButton';
 
-import { EditView } from './index';
+import EditView from './index';
 import ModelForm from '../model-form';
 
 describe('[Component] EditView', () => {
@@ -55,11 +55,11 @@ describe('[Component] EditView', () => {
     it('should navigate to the list route of a given model when the return button is clicked', () => {
       const routeSpy = sinon.spy();
       const { shallowWrapper } = setup({
-        navigateTo: routeSpy,
+        navigateToList: routeSpy,
       });
 
       shallowWrapper.find(IconButton).simulate('click');
-      expect(routeSpy.calledWith('/referentiel-controles-bce/list')).to.be.true; // eslint-disable-line
+      expect(routeSpy.calledWith()).to.be.true; // eslint-disable-line
     });
 
     it('should call the findEntry prop when the component mounts', () => {
