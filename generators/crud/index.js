@@ -29,7 +29,6 @@ module.exports = generators.Base.extend({
         if (!isEmpty(errors)) {
           this.log('----------INVALID JSON-----------');
           this.log(errors.join('\n'));
-          done();
           return;
         }
         assign(this.options, file);
@@ -242,8 +241,8 @@ module.exports = generators.Base.extend({
           this.destinationPath(`client/source/components/crud-view/list-view/styles.css`)
         ),
         this.fs.copy(
-          this.templatePath('components/list-view/index.js'),
-          this.destinationPath(`client/source/components/crud-view/list-view/list-view.js`)
+          this.templatePath('components/list-view/index.jsx'),
+          this.destinationPath(`client/source/components/crud-view/list-view/index.jsx`)
         ),
         this.fs.copy(
           this.templatePath('components/list-view/index.test.js'),
@@ -268,8 +267,8 @@ module.exports = generators.Base.extend({
           this.destinationPath(`client/source/components/crud-view/edit-view/styles.css`)
         ),
         this.fs.copy(
-          this.templatePath('components/edit-view/index.js'),
-          this.destinationPath(`client/source/components/crud-view/edit-view/list-view.js`)
+          this.templatePath('components/edit-view/index.jsx'),
+          this.destinationPath(`client/source/components/crud-view/edit-view/index.jsx`)
         ),
         this.fs.copy(
           this.templatePath('components/edit-view/index.test.js'),
@@ -294,8 +293,8 @@ module.exports = generators.Base.extend({
           this.destinationPath(`client/source/components/crud-view/create-view/styles.css`)
         ),
         this.fs.copy(
-          this.templatePath('components/create-view/index.js'),
-          this.destinationPath(`client/source/components/crud-view/create-view/list-view.js`)
+          this.templatePath('components/create-view/index.jsx'),
+          this.destinationPath(`client/source/components/crud-view/create-view/index.jsx`)
         ),
         this.fs.copy(
           this.templatePath('components/create-view/index.test.js'),
