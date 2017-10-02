@@ -102,6 +102,7 @@ export default class ListView extends Component {
           export={this.export}
           onImportChange={this.import}
           modelBasePath={this.props.routeName}
+          hasEditRights={this.hasEditRights}
         />
         <ReactTable
           className={`${styles.table} -highlight -striped`}
