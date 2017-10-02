@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   navigateToList: () => {
-    dispatch(push('/<%= apiUrl %>/list'));
+    dispatch(push('/<%= modelName %>/list'));
   },
   createNewEntry: formValues => {
     dispatch(modelActions.create(formValues));

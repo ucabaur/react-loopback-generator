@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import ActionList from 'material-ui/svg-icons/action/list';
 
-import ModelForm from '../model-form/';
+import ModelForm from '../model-form';
 
 import styles from './styles.css';
 
