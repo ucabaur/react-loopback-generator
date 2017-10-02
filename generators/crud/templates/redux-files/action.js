@@ -80,7 +80,7 @@ export default {
       data.append('file', file);
       dispatch(this.setLoading());
       dispatch(
-        request('api/<%= apiUrl %>/import', {
+        request('<%= apiUrl %>/import', {
           method: 'POST',
           body: data,
         }),

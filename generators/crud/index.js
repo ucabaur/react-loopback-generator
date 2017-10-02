@@ -29,7 +29,6 @@ module.exports = generators.Base.extend({
         if (!isEmpty(errors)) {
           this.log('----------INVALID JSON-----------');
           this.log(errors.join('\n'));
-          done();
           return;
         }
         assign(this.options, file);
@@ -162,6 +161,18 @@ module.exports = generators.Base.extend({
         }
       }));
     },
+    createServices: function () {
+      const constantFileName = kebabCase(this.options.name);
+      this.fs.copyTpl(
+        this.templatePath('services/access-control.js'),
+        this.destinationPath(`client/source/services/access-control.js`)
+      );
+
+      return this.fs.copyTpl(
+        this.templatePath('selectors/user-perimeters.js'),
+        this.destinationPath(`client/source/selectors/user-perimeters.js`)
+      );
+    },
     createConstant: function () {
       const constantFileName = kebabCase(this.options.name);
       return this.fs.copyTpl(
@@ -226,59 +237,69 @@ module.exports = generators.Base.extend({
           }
         ),
         this.fs.copy(
-          this.templatePath('crud-views/list-view.css'),
-          this.destinationPath(`client/source/containers/models/${containerFolder}/list-view/styles.css`)
+          this.templatePath('components/list-view/styles.css'),
+          this.destinationPath(`client/source/components/crud-view/list-view/styles.css`)
         ),
         this.fs.copy(
-          this.templatePath('crud-views/list-view.test.js'),
-          this.destinationPath(`client/source/containers/models/${containerFolder}/list-view/index.test.js`)
+          this.templatePath('components/list-view/index.jsx'),
+          this.destinationPath(`client/source/components/crud-view/list-view/index.jsx`)
+        ),
+        this.fs.copy(
+          this.templatePath('components/list-view/index.test.js'),
+          this.destinationPath(`client/source/components/crud-view/list-view/index.test.js`)
         ),
       ]);
     },
     editView: function(){
       const containerFolder = kebabCase(this.options.name);
+      const apiUrl = `api/${kebabCase(this.options.plural)}`;
       return Promise.all([
         this.fs.copyTpl(
           this.templatePath('crud-views/edit-view.tmpl.js'),
           this.destinationPath(`client/source/containers/models/${containerFolder}/edit-view/index.jsx`),
           {
             modelName: kebabCase(this.options.name),
+            apiUrl,
           }
         ),
         this.fs.copy(
-          this.templatePath('crud-views/edit-view.css'),
-          this.destinationPath(`client/source/containers/models/${containerFolder}/edit-view/styles.css`)
+          this.templatePath('components/edit-view/styles.css'),
+          this.destinationPath(`client/source/components/crud-view/edit-view/styles.css`)
         ),
-        this.fs.copyTpl(
-          this.templatePath('crud-views/edit-view.test.js'),
-          this.destinationPath(`client/source/containers/models/${containerFolder}/edit-view/index.test.js`),
-          {
-            modelName: kebabCase(this.options.name),
-          }
+        this.fs.copy(
+          this.templatePath('components/edit-view/index.jsx'),
+          this.destinationPath(`client/source/components/crud-view/edit-view/index.jsx`)
+        ),
+        this.fs.copy(
+          this.templatePath('components/edit-view/index.test.js'),
+          this.destinationPath(`client/source/components/crud-view/edit-view/index.test.js`)
         ),
       ]);
     },
     createView: function(){
       const containerFolder = kebabCase(this.options.name);
+      const apiUrl = `api/${kebabCase(this.options.plural)}`;
       return Promise.all([
         this.fs.copyTpl(
           this.templatePath('crud-views/create-view.tmpl.js'),
           this.destinationPath(`client/source/containers/models/${containerFolder}/create-view/index.jsx`),
           {
             modelName: kebabCase(this.options.name),
+            apiUrl,
           }
         ),
         this.fs.copy(
-          this.templatePath('crud-views/create-view.css'),
-          this.destinationPath(`client/source/containers/models/${containerFolder}/create-view/styles.css`)
+          this.templatePath('components/create-view/styles.css'),
+          this.destinationPath(`client/source/components/crud-view/create-view/styles.css`)
         ),
-        this.fs.copyTpl(
-          this.templatePath('crud-views/create-view.test.js'),
-          this.destinationPath(`client/source/containers/models/${containerFolder}/create-view/index.test.js`),
-          {
-            modelName: kebabCase(this.options.name),
-          }
-        )
+        this.fs.copy(
+          this.templatePath('components/create-view/index.jsx'),
+          this.destinationPath(`client/source/components/crud-view/create-view/index.jsx`)
+        ),
+        this.fs.copy(
+          this.templatePath('components/create-view/index.test.js'),
+          this.destinationPath(`client/source/components/crud-view/create-view/index.test.js`)
+        ),
       ]);
     },
     addCrudToJSON: function () {

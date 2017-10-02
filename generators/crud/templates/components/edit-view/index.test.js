@@ -5,20 +5,25 @@ import sinon from 'sinon';
 
 import IconButton from 'material-ui/IconButton';
 
-import { CreateView } from './index';
-import ModelForm from '../../../../components/crud-view/model-form';
+import EditView from './index';
+import ModelForm from '../model-form';
 
-describe('[Component] CreateView', () => {
+describe('[Component] EditView', () => {
   const defaultProps = {
-    navigateTo: () => {},
     intl: {
       formatMessage: obj => obj.id,
+    },
+    navigateToList: () => {},
+    editEntry: () => {},
+    findEntry: () => {},
+    params: {
+      id: '1',
     },
   };
 
   const setup = propsOverride => {
     const finalProps = Object.assign(defaultProps, propsOverride);
-    const shallowWrapper = shallow(<CreateView {...finalProps} />);
+    const shallowWrapper = shallow(<EditView {...finalProps} />);
     return {
       shallowWrapper,
     };
@@ -50,12 +55,23 @@ describe('[Component] CreateView', () => {
     it('should navigate to the list route of a given model when the return button is clicked', () => {
       const routeSpy = sinon.spy();
       const { shallowWrapper } = setup({
-        navigateTo: routeSpy,
+        navigateToList: routeSpy,
       });
 
       shallowWrapper.find(IconButton).simulate('click');
-      expect(routeSpy.calledWith('/<%= modelName %>/list')).to.be.true; // eslint-disable-line
+      expect(routeSpy.calledWith()).to.be.true; // eslint-disable-line
+    });
+
+    it('should call the findEntry prop when the component mounts', () => {
+      const findEntrySpy = sinon.spy();
+      setup({
+        findEntry: findEntrySpy,
+        params: {
+          id: '4',
+        },
+      });
+
+      expect(findEntrySpy.calledWith('4')).to.be.true; // eslint-disable-line
     });
   });
 });
-
