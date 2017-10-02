@@ -6,14 +6,14 @@ import sinon from 'sinon';
 import IconButton from 'material-ui/IconButton';
 
 import { EditView } from './index';
-import ModelForm from '../../../../components/crud-view/model-form';
+import ModelForm from '../model-form';
 
 describe('[Component] EditView', () => {
   const defaultProps = {
     intl: {
       formatMessage: obj => obj.id,
     },
-    navigateTo: () => {},
+    navigateToList: () => {},
     editEntry: () => {},
     findEntry: () => {},
     params: {
@@ -59,7 +59,7 @@ describe('[Component] EditView', () => {
       });
 
       shallowWrapper.find(IconButton).simulate('click');
-      expect(routeSpy.calledWith('/<%= modelName %>/list')).to.be.true; // eslint-disable-line
+      expect(routeSpy.calledWith('/referentiel-controles-bce/list')).to.be.true; // eslint-disable-line
     });
 
     it('should call the findEntry prop when the component mounts', () => {

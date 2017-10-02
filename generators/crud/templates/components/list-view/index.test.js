@@ -7,7 +7,7 @@ import ReactTable from 'react-table';
 import Dialog from 'material-ui/Dialog';
 
 import { ListView } from './index';
-import TableManager from '../../../../components/crud-view/table-manager';
+import TableManager from '../table-manager';
 
 describe('[Component] ListView', () => {
   const defaultProps = {
@@ -16,7 +16,7 @@ describe('[Component] ListView', () => {
     getList: () => {},
     import: () => {},
     export: () => {},
-    navigateTo: () => {},
+    navigateToList: () => {},
     intl: {
       formatMessage: obj => obj.id,
     },
