@@ -1,8 +1,8 @@
 import expect from 'expect';
 import cst from '../../constants/models/<%= constantFileName %>.json';
-import reducer from './<%= reducerFileNmae %>.js';
+import reducer from './<%= reducerFileName %>.js';
 
-describe('[Reducer] <%= reducerFileNmae %> Reducer', () => {
+describe('[Reducer] <%= reducerFileName %> Reducer', () => {
   it('should set the default state', () => {
     const newState = reducer(undefined, { type: 'test' });
     expect(newState).toEqual({

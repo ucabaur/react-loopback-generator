@@ -182,18 +182,16 @@ module.exports = generators.Base.extend({
         actionFileName
       };
 
-      return this.fs.copyTpl(
+      this.fs.copyTpl(
         this.templatePath('redux-files/action.js'),
         this.destinationPath(`client/source/actions/models/${actionFileName}.js`),
         templateVariables
-      )
-      .then(() => {
-        return this.fs.copyTpl(
-          this.templatePath('redux-files/action.test.js'),
-          this.destinationPath(`client/source/actions/models/${actionFileName}.test.js`),
-          templateVariables
-        )
-      });
+      );
+      return this.fs.copyTpl(
+        this.templatePath('redux-files/action.test.js'),
+        this.destinationPath(`client/source/actions/models/${actionFileName}.test.js`),
+        templateVariables
+      );
     },
     createReducer: function () {
       const reducerFileName = kebabCase(this.options.name);
@@ -205,18 +203,16 @@ module.exports = generators.Base.extend({
         reducerFileName
       };
 
-      return this.fs.copyTpl(
+      this.fs.copyTpl(
         this.templatePath('redux-files/reducer.js'),
         this.destinationPath(`client/source/reducers/models/${reducerFileName}.js`),
         templateVariables
       )
-      .then(() => {
-        return this.fs.copyTpl(
-          this.templatePath('redux-files/reducer.test.js'),
-          this.destinationPath(`client/source/reducers/models/${reducerFileName}.test.js`),
-          templateVariables
-        )
-      });
+      return this.fs.copyTpl(
+        this.templatePath('redux-files/reducer.test.js'),
+        this.destinationPath(`client/source/reducers/models/${reducerFileName}.test.js`),
+        templateVariables
+      );
     },
     listView: function(){
       const containerFolder = kebabCase(this.options.name);
