@@ -19,6 +19,7 @@ const mapStateToProps = state => ({
   loading: state.models['<%= modelName %>'].loading,
   userPerimeters: getUserPerimeters(state),
   routeName: '<%= modelName %>',
+  modelName: '<%= modelTitleName %>',
   model,
   modelKeyId,
 });

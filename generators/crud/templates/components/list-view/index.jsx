@@ -31,7 +31,7 @@ export default class ListView extends Component {
         Cell: row => (
           <TableActionCell
             row={row}
-            navigateTo={this.props.navigateTo}
+            navigateTo={props.navigateTo}
             deleteElement={this.setElementToDelete}
             modelBasePath={props.routeName}
           />
@@ -103,6 +103,7 @@ export default class ListView extends Component {
           onImportChange={this.import}
           modelBasePath={this.props.routeName}
           hasEditRights={this.hasEditRights}
+          modelBaseName={props.modelName}
         />
         <ReactTable
           className={`${styles.table} -highlight -striped`}
@@ -147,5 +148,6 @@ ListView.propTypes = {
   model: PropTypes.object, // eslint-disable-line
   modelKeyId: PropTypes.string,
   routeName: PropTypes.string.isRequired,
+  modelName: PropTypes.string.isRequired,
   userPerimeters: PropTypes.arrayOf(PropTypes.string),
 };

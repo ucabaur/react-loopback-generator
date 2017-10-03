@@ -20,7 +20,7 @@ export class TableManager extends Component {
       <div className={style.tableManagerWrapper}>
         <h2>
           {`${formatMessage({ id: 'list.table-manager.title' })} ${this.props
-            .modelBasePath}`}
+            .modelBaseName}`}
         </h2>
         <RaisedButton
           label={formatMessage({ id: 'list.table-manager.create' })}
@@ -60,6 +60,7 @@ TableManager.propTypes = {
   navigateTo: PropTypes.func.isRequired,
   onImportChange: PropTypes.func.isRequired,
   modelBasePath: PropTypes.string,
+  modelBaseName: PropTypes.string,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired,
   }).isRequired,
