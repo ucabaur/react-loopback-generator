@@ -14,6 +14,12 @@ describe('[Component] CreateView', () => {
     intl: {
       formatMessage: obj => obj.id,
     },
+    createNewEntry: () => {},
+    modelKeyId: 'modelKeyId',
+    model: {
+      name: 'modelMock',
+      properties: [],
+    },
   };
 
   const setup = propsOverride => {

@@ -16,8 +16,13 @@ describe('[Component] EditView', () => {
     navigateToList: () => {},
     editEntry: () => {},
     findEntry: () => {},
+    modelKeyId: 'modelKeyId',
     params: {
       id: '1',
+    },
+    model: {
+      name: 'modelMock',
+      properties: [],
     },
   };
 

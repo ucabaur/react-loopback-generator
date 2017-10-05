@@ -1,4 +1,4 @@
-import { intersection, find } from 'lodash';
+import { intersection, find, filter } from 'lodash';
 import crudRoutes from '../crud-routes/crud-routes.json';
 
 export const canWrite = (userPerimeters, componentName) => {
@@ -23,4 +23,16 @@ export const canRead = (userPerimeters, componentName) => {
   return intersection(route.ACL.READ, userPerimeters).length > 0;
 };
 
-export default { canWrite, canRead };
+export const getUserRoutes = userPerimeters => {
+  const routes = filter(crudRoutes.active, route => {
+    if (!route.ACL) return false;
+    const _canRead = intersection(route.ACL.READ, userPerimeters).length > 0;
+    const _canWrite = intersection(route.ACL.WRITE, userPerimeters).length > 0;
+
+    return _canRead || _canWrite;
+  });
+
+  return routes;
+};
+
+export default { canWrite, canRead, getUserRoutes };

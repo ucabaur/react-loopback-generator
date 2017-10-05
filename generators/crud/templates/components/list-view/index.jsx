@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
 
 import { map } from 'lodash';
 
@@ -103,7 +102,7 @@ export default class ListView extends Component {
           onImportChange={this.import}
           modelBasePath={this.props.routeName}
           hasEditRights={this.hasEditRights}
-          modelBaseName={props.modelName}
+          modelBaseName={this.props.modelName}
         />
         <ReactTable
           className={`${styles.table} -highlight -striped`}
@@ -138,7 +137,9 @@ export default class ListView extends Component {
 ListView.propTypes = {
   data: PropTypes.array, // eslint-disable-line
   authentication: PropTypes.object, // eslint-disable-line
-  intl: intlShape.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   loading: PropTypes.bool.isRequired,
   navigateTo: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,

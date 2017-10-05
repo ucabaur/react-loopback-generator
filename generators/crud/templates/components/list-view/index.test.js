@@ -16,9 +16,15 @@ describe('[Component] ListView', () => {
     getList: () => {},
     import: () => {},
     export: () => {},
-    navigateToList: () => {},
+    deleteItem: () => {},
+    navigateTo: () => {},
+    routeName: 'referentiel-ae',
     intl: {
       formatMessage: obj => obj.id,
+    },
+    model: {
+      name: 'modelMock',
+      properties: [],
     },
   };
 
