@@ -24,7 +24,9 @@ export default class EditView extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-    const { modelKeyId, model } = this.props;
+    const { modelKeyId, model, userHasEditRights } = this.props;
+
+    if (!userHasEditRights) return <div />;
 
     return (
       <div className={styles.container}>
@@ -62,4 +64,5 @@ EditView.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,
+  userHasEditRights: PropTypes.bool.isRequired,
 };
