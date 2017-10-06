@@ -12,7 +12,6 @@ import FlatButton from 'material-ui/FlatButton';
 import TableManager from '../table-manager';
 import TableActionCell from '../table-action-cell';
 import styles from './styles.css';
-import { canWrite } from '../../../services/access-control.js';
 
 export default class ListView extends Component {
   constructor(props, context) {
@@ -38,9 +37,7 @@ export default class ListView extends Component {
       },
     ];
 
-    this.hasEditRights = canWrite(props.userPerimeters, props.routeName);
-
-    if (!this.hasEditRights) {
+    if (!this.props.userHasEditRights) {
       customColumns = [];
     }
 
@@ -101,7 +98,7 @@ export default class ListView extends Component {
           export={this.export}
           onImportChange={this.import}
           modelBasePath={this.props.routeName}
-          hasEditRights={this.hasEditRights}
+          hasEditRights={this.props.userHasEditRights}
           modelBaseName={this.props.modelName}
         />
         <ReactTable
@@ -150,5 +147,5 @@ ListView.propTypes = {
   modelKeyId: PropTypes.string,
   routeName: PropTypes.string.isRequired,
   modelName: PropTypes.string.isRequired,
-  userPerimeters: PropTypes.arrayOf(PropTypes.string),
+  userHasEditRights: PropTypes.bool.isRequired,
 };

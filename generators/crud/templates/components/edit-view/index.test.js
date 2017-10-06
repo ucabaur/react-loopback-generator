@@ -10,6 +10,7 @@ import ModelForm from '../model-form';
 
 describe('[Component] EditView', () => {
   const defaultProps = {
+    userHasEditRights: true,
     intl: {
       formatMessage: obj => obj.id,
     },
@@ -37,6 +38,13 @@ describe('[Component] EditView', () => {
   it('should exist', () => {
     const { shallowWrapper } = setup();
     expect(shallowWrapper.exists()).to.be.true; // eslint-disable-line
+  });
+
+  it('should return a div if user cannot use form', () => {
+    const { shallowWrapper } = setup();
+    shallowWrapper.setProps({ userHasEditRights: false });
+    expect(shallowWrapper.find(ModelForm).length).to.equal(0);
+    expect(shallowWrapper.find(IconButton).length).to.equal(0);
   });
 
   describe('[UI]', () => {

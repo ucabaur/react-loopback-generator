@@ -18,7 +18,10 @@ export default class CreateView extends Component {
 
   render() {
     const { formatMessage } = this.props.intl;
-    const { model, modelKeyId } = this.props;
+    const { model, modelKeyId, userHasEditRights } = this.props;
+
+    if (!userHasEditRights) return <div />;
+
     return (
       <div className={styles.container}>
         <div className={styles.headerTitle}>
@@ -53,4 +56,5 @@ CreateView.propTypes = {
   createNewEntry: PropTypes.func.isRequired,
   modelKeyId: PropTypes.string.isRequired,
   model: PropTypes.object, // eslint-disable-line
+  userHasEditRights: PropTypes.bool.isRequired,
 };
