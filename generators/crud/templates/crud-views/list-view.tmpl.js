@@ -23,8 +23,8 @@ const mapStateToProps = state => {
   const userHasEditRights = canWrite(userPerimeters, routeName);
   return {
     authentication: state.authentication,
-    data: state.models.routeName.list,
-    loading: state.models.routeName.loading,
+    data: state.models[routeName].list,
+    loading: state.models[routeName].loading,
     routeName,
     modelName,
     model,
