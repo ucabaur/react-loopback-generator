@@ -22,7 +22,7 @@ module.exports = generators.Base.extend({
         {
           type: 'input',
           name: 'configFile',
-          message: 'Enter the path to the folder with your model config (JSON):',
+          message: 'Enter the path to the JSON file describing all your models:',
         },
       ]).then(userPrompt => {
         const file = this.fs.readJSON(userPrompt.configFile);
